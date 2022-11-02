@@ -1,9 +1,10 @@
+import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 import java.util.concurrent.Executors;
 
 public class Main {
 
-    public static final Map<Integer, Integer> sizeToFreq = new TreeMap<>();     // TreeMap для сортировки по key
+    public static final SortedMap<Integer, Integer> sizeToFreq = new TreeMap<>(Comparator.reverseOrder());     // TreeMap для сортировки по key
 
     public static void main(String[] args) {
         int amountOfThreads = 1000;
@@ -35,6 +36,13 @@ public class Main {
 
         pool.shutdown();
 
+        System.out.println("Наибольшее количество повторений R - " +
+                sizeToFreq.firstKey() +
+                " встретилось " +
+                sizeToFreq.get(sizeToFreq.firstKey()) +
+                " раз"
+        );
+        System.out.println("\nВсе повторения: ");
         sizeToFreq.forEach((x, y) -> System.out.println(x + " (" + y + " раз)"));
     }
 
