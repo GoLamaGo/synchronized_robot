@@ -7,17 +7,19 @@ public class Main {
 
     public static void main(String[] args) {
         int amountOfThreads = 1000;
-        char r = 'R';
+        String letters = "RLRFR";
+        int stringLength = 100;
+        char charToFind = 'R';
 
-        var pool = Executors.newFixedThreadPool(1000);
+        var pool = Executors.newFixedThreadPool(amountOfThreads);
 
         for (int t = 0; t < amountOfThreads; t++) {
             pool.submit(
                     new Thread(() -> {
-                        String route = generateRoute("RLRFR", 100);
+                        String route = generateRoute(letters, stringLength);
                         int amountOfR = 0;
                         for (int i = 0; i < route.length(); i++) {
-                            if (route.charAt(i) == r) {
+                            if (route.charAt(i) == charToFind) {
                                 amountOfR++;
                             }
                         }
